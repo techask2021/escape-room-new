@@ -1,0 +1,398 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Prevent flash of unstyled content (FOUC) */
+html {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Ensure body has background immediately */
+body {
+  background-color: #f8fafc;
+  min-height: 100vh;
+}
+
+:root {
+  --background: oklch(0.95 0.02 240);
+  --foreground: oklch(0.2 0.02 240);
+  --card: oklch(1 0.01 240);
+  --card-foreground: oklch(0.2 0.02 240);
+  --popover: oklch(1 0.01 240);
+  --popover-foreground: oklch(0.2 0.02 240);
+  --primary: oklch(0.55 0.22 20);
+  --primary-foreground: oklch(1 0.01 240);
+  --secondary: oklch(0.75 0.2 200);
+  --secondary-foreground: oklch(0.2 0.02 240);
+  --muted: oklch(0.9 0.02 240);
+  --muted-foreground: oklch(0.5 0.02 240);
+  --accent: oklch(0.85 0.15 190);
+  --accent-foreground: oklch(0.2 0.02 240);
+  --destructive: oklch(0.6 0.25 30);
+  --destructive-foreground: oklch(1 0.01 240);
+  --border: oklch(0.8 0.02 240);
+  --input: oklch(0.8 0.02 240);
+  --ring: oklch(0.65 0.25 180);
+  --chart-1: oklch(0.65 0.22 40);
+  --chart-2: oklch(0.6 0.12 185);
+  --chart-3: oklch(0.4 0.07 225);
+  --chart-4: oklch(0.83 0.19 85);
+  --chart-5: oklch(0.77 0.19 70);
+  --radius: 0.625rem;
+  --sidebar: oklch(1 0 0);
+  --sidebar-foreground: oklch(0.2 0 0);
+  --sidebar-primary: oklch(0.7 0.2 180);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.95 0 0);
+  --sidebar-accent-foreground: oklch(0.2 0 0);
+  --sidebar-border: oklch(0.85 0 0);
+  --sidebar-ring: oklch(0.7 0.2 180);
+}
+
+.dark {
+  --background: oklch(0.15 0.02 240);
+  --foreground: oklch(0.95 0.02 240);
+  --card: oklch(0.2 0.02 240);
+  --card-foreground: oklch(0.95 0.02 240);
+  --popover: oklch(0.2 0.02 240);
+  --popover-foreground: oklch(0.95 0.02 240);
+  --primary: oklch(0.55 0.22 20);
+  --primary-foreground: oklch(1 0.01 240);
+  --secondary: oklch(0.25 0.15 200);
+  --secondary-foreground: oklch(0.95 0.02 240);
+  --muted: oklch(0.25 0.02 240);
+  --muted-foreground: oklch(0.7 0.02 240);
+  --accent: oklch(0.3 0.15 190);
+  --accent-foreground: oklch(0.95 0.02 240);
+  --destructive: oklch(0.4 0.15 25);
+  --destructive-foreground: oklch(0.95 0.02 240);
+  --border: oklch(0.25 0 0);
+  --input: oklch(0.25 0 0);
+  --ring: oklch(0.7 0.2 180);
+  --chart-1: oklch(0.5 0.25 265);
+  --chart-2: oklch(0.7 0.17 160);
+  --chart-3: oklch(0.77 0.19 70);
+  --chart-4: oklch(0.63 0.27 305);
+  --chart-5: oklch(0.65 0.25 15);
+  --sidebar: oklch(0.2 0 0);
+  --sidebar-foreground: oklch(0.95 0 0);
+  --sidebar-primary: oklch(0.7 0.2 180);
+  --sidebar-primary-foreground: oklch(0.95 0 0);
+  --sidebar-accent: oklch(0.25 0 0);
+  --sidebar-accent-foreground: oklch(0.95 0 0);
+  --sidebar-border: oklch(0.25 0 0);
+  --sidebar-ring: oklch(0.7 0.2 180);
+}
+
+:root {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius: var(--radius);
+  --color-sidebar-background: var(--sidebar-background);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Tenon', sans-serif;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+    min-height: 100vh;
+  }
+  
+  /* Apply Tenon font to all text elements */
+  h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, label {
+    font-family: 'Tenon', sans-serif;
+  }
+  
+  /* Centered container with proper max-widths */
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  @media (min-width: 640px) {
+    .container {
+      max-width: 640px;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .container {
+      max-width: 768px;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .container {
+      max-width: 1024px;
+    }
+  }
+  
+  @media (min-width: 1280px) {
+    .container {
+      max-width: 1280px;
+    }
+  }
+  
+  @media (min-width: 1536px) {
+    .container {
+      max-width: 1536px;
+    }
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* Escape Room Theme Utilities */
+  .shadow-3xl {
+    box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
+  }
+  
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  /* Enhanced mystery floating animation */
+  @keyframes mystery-float {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg) scale(1);
+    }
+    25% {
+      transform: translateY(-10px) rotate(90deg) scale(1.1);
+    }
+    50% {
+      transform: translateY(-20px) rotate(180deg) scale(1);
+    }
+    75% {
+      transform: translateY(-10px) rotate(270deg) scale(1.1);
+    }
+  }
+  
+  .animate-mystery-float {
+    animation: mystery-float 6s ease-in-out infinite;
+  }
+
+  /* Slow spin animation for geometric elements */
+  @keyframes spin-slow {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .animate-spin-slow {
+    animation: spin-slow 20s linear infinite;
+  }
+
+  /* Fade in up animation */
+  @keyframes fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-fade-in-up {
+    animation: fade-in-up 0.6s ease-out forwards;
+  }
+  
+  /* Escape room card hover effects */
+  .escape-card-hover {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .escape-card-hover:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 25px 50px -12px rgba(230, 39, 39, 0.25);
+  }
+
+  /* Custom text selection for search input - maximum specificity override */
+  .search-input-wrapper input[data-slot="input"]::selection,
+  .search-input-wrapper input::selection,
+  .search-input-wrapper input.search-input-selection::selection,
+  input.search-input-selection::selection,
+  input[data-slot="input"].search-input-selection::selection {
+    background-color: #dc2626 !important;
+    background: #dc2626 !important;
+    color: white !important;
+    -webkit-text-fill-color: white !important;
+  }
+
+  .search-input-wrapper input[data-slot="input"]::-moz-selection,
+  .search-input-wrapper input::-moz-selection,
+  .search-input-wrapper input.search-input-selection::-moz-selection,
+  input.search-input-selection::-moz-selection,
+  input[data-slot="input"].search-input-selection::-moz-selection {
+    background-color: #dc2626 !important;
+    background: #dc2626 !important;
+    color: white !important;
+  }
+
+  /* Override any Tailwind selection utilities with maximum specificity */
+  .search-input-wrapper input[data-slot="input"][class*="selection:"]::selection,
+  .search-input-wrapper input[class*="selection:"]::selection,
+  input.search-input-selection[class*="selection:"]::selection,
+  input[data-slot="input"].search-input-selection[class*="selection:"]::selection {
+    background-color: #dc2626 !important;
+    background: #dc2626 !important;
+    color: white !important;
+    -webkit-text-fill-color: white !important;
+  }
+
+  .search-input-wrapper input[data-slot="input"][class*="selection:"]::-moz-selection,
+  .search-input-wrapper input[class*="selection:"]::-moz-selection,
+  input.search-input-selection[class*="selection:"]::-moz-selection,
+  input[data-slot="input"].search-input-selection[class*="selection:"]::-moz-selection {
+    background-color: #dc2626 !important;
+    background: #dc2626 !important;
+    color: white !important;
+  }
+
+  /* Text selection for textarea */
+  .search-input-wrapper textarea.search-input-selection::selection,
+  textarea.search-input-selection::selection,
+  textarea[data-slot="input"].search-input-selection::selection {
+    background-color: #dc2626 !important;
+    background: #dc2626 !important;
+    color: white !important;
+    -webkit-text-fill-color: white !important;
+  }
+
+  .search-input-wrapper textarea.search-input-selection::-moz-selection,
+  textarea.search-input-selection::-moz-selection,
+  textarea[data-slot="input"].search-input-selection::-moz-selection {
+    background-color: #dc2626 !important;
+    background: #dc2626 !important;
+    color: white !important;
+  }
+
+  .search-input-wrapper textarea[data-slot="input"][class*="selection:"]::selection,
+  .search-input-wrapper textarea[class*="selection:"]::selection,
+  textarea.search-input-selection[class*="selection:"]::selection,
+  textarea[data-slot="input"].search-input-selection[class*="selection:"]::selection {
+    background-color: #dc2626 !important;
+    background: #dc2626 !important;
+    color: white !important;
+    -webkit-text-fill-color: white !important;
+  }
+
+  .search-input-wrapper textarea[data-slot="input"][class*="selection:"]::-moz-selection,
+  .search-input-wrapper textarea[class*="selection:"]::-moz-selection,
+  textarea.search-input-selection[class*="selection:"]::-moz-selection,
+  textarea[data-slot="input"].search-input-selection[class*="selection:"]::-moz-selection {
+    background-color: #dc2626 !important;
+    background: #dc2626 !important;
+    color: white !important;
+  }
+
+  /* Venue content styling - fix text truncation and improve readability */
+  .venue-content h1,
+  .venue-content h2,
+  .venue-content h3,
+  .venue-content h4,
+  .venue-content h5,
+  .venue-content h6 {
+    overflow: visible !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+  }
+
+  .venue-content h2 span,
+  .venue-content h1 span {
+    display: inline-block !important;
+    overflow: visible !important;
+    white-space: normal !important;
+    max-width: 100% !important;
+    padding-right: 0 !important;
+  }
+
+  /* Ensure gradient text doesn't clip */
+  .venue-content [class*="bg-clip-text"] {
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    padding-right: 2px;
+  }
+
+  /* Improved content spacing */
+  .venue-content p {
+    margin-bottom: 1rem;
+  }
+
+  .venue-content ul,
+  .venue-content ol {
+    margin-bottom: 1rem;
+  }
+
+  .venue-content h2 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .venue-content h3 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python:*)",
+      "Bash(pip install:*)",
+      "Bash(dir:*)",
+      "Bash(npm install:*)",
+      "Bash(pnpm add:*)",
+      "Bash(pnpm remove:*)",
+      "Bash(npx tsc:*)",
+      "Bash(nul)",
+      "Bash(find:*)",
+      "Bash(npm run build:*)",
+      "Bash(timeout 120 npm run build)",
+      "Bash(cat:*)",
+      "Bash(curl:*)",
+      "Bash(pnpm dev:*)",
+      "Bash(timeout 10 echo:*)",
+      "Bash(timeout 5 echo:*)",
+      "Bash(timeout 15 echo:*)",
+      "Bash(timeout 5 curl:*)",
+      "Bash(timeout 10 curl:*)",
+      "Bash(timeout 30 bash -c 'while ! grep -q \"\"@tailwindcss/typography\"\" \"\"e:\\My Codes\\Workspace For Completed Projects Codes\\escape-room\\package.json\"\" 2>/dev/null; do sleep 1; done && echo \"\"Package installed\"\"')",
+      "Bash(echo:*)",
+      "Bash(pnpm install:*)",
+      "Bash(pnpm run build:*)",
+      "Bash(timeout 180 pnpm run build:*)",
+      "Bash(npm run dev:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nMigrate from Supabase to WordPress headless CMS\n\nMajor Changes:\n- Switch data source from Supabase to WordPress GraphQL API\n- Add WordPress headless integration with WPGraphQL\n- Implement contact form and newsletter via Fluent Forms API\n- Remove Supabase, Sanity, ImageKit, and Redis dependencies\n- Add production environment configuration\n- Optimize performance: reduce homepage rooms from 12 to 6\n- Remove dynamic imports for Newsletter/CTA sections for faster loading\n- Clean up unused authentication and listing management features\n\nTechnical Improvements:\n- New WordPress GraphQL client with caching\n- ISR (Incremental Static Regeneration) with 15-minute revalidation\n- Add image hostname for live WordPress domain\n- Implement 301 redirects for old URL patterns\n- Update all location pages to use WordPress data source\n- Add proper error handling for WordPress API calls\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git push:*)",
+      "Bash(git commit:*)",
+      "Bash(time curl:*)",
+      "Bash(ssh root@185.193.17.202 \"cd /var/www/html && cat > .user.ini << ''EOF''\nupload_max_filesize = 128M\npost_max_size = 128M\nmax_execution_time = 300\nmax_input_time = 300\nmemory_limit = 256M\nEOF\ncat .user.ini\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

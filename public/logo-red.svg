@@ -1,0 +1,19 @@
+<svg width="200" height="64" viewBox="0 0 200 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle for the icon -->
+  <circle cx="32" cy="32" r="28" fill="#E62727" stroke="#B91C1C" stroke-width="2"/>
+  
+  <!-- Escape room icon - lock and key symbol -->
+  <g transform="translate(16, 16)">
+    <!-- Lock body -->
+    <rect x="8" y="12" width="16" height="12" fill="white" rx="2"/>
+    <!-- Lock shackle -->
+    <path d="M12 8 L12 4 C12 2.5 13.5 1 15 1 C16.5 1 18 2.5 18 4 L18 8" stroke="white" stroke-width="2" fill="none"/>
+    <!-- Key hole -->
+    <circle cx="16" cy="18" r="2" fill="#E62727"/>
+    <rect x="15" y="18" width="2" height="4" fill="#E62727"/>
+  </g>
+  
+  <!-- Text -->
+  <text x="70" y="25" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#E62727">Escape Rooms</text>
+  <text x="70" y="45" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#666">Finder</text>
+</svg>

@@ -1,0 +1,11 @@
+<svg width="200" height="64" viewBox="0 0 200 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background for the logo image -->
+  <rect x="0" y="0" width="64" height="64" fill="none"/>
+  
+  <!-- Your PNG logo image - centered in the left section -->
+  <image href="/images/escape-room-finder.png" x="8" y="8" width="48" height="48" preserveAspectRatio="xMidYMid meet"/>
+  
+  <!-- Text with better spacing -->
+  <text x="75" y="30" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#E62727">Escape Rooms</text>
+  <text x="75" y="50" font-family="Arial, sans-serif" font-size="18" font-weight="normal" fill="#666">Finder</text>
+</svg>
