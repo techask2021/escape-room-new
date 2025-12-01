@@ -18,6 +18,8 @@ import { formatStateForURL, formatCityForURL as formatCityForURLFunc } from "@/l
 // Enable ISR - revalidate every 24 hours (data only changes on manual WordPress updates)
 // Reduced from 30 minutes to save CPU and reduce WordPress API calls
 export const revalidate = 86400
+// Force dynamic rendering to avoid Next.js runtime error when the page becomes dynamic
+export const dynamic = 'force-dynamic'
 
 // Helper function to convert URL country format to page route format
 function getCountryRouteFromURL(urlCountry: string): string {
@@ -45,6 +47,7 @@ export default async function VenueDetailPage({
 }: {
   params: Promise<{ country: string; state: string; city: string; venue: string }>
 }) {
+  try {
   // Await params in Next.js 15
   const { country, state, city, venue } = await params
 
@@ -431,6 +434,11 @@ export default async function VenueDetailPage({
       </section>
     </div>
   )
+  } catch (error) {
+    console.error('[VenueDetailPage Error]:', error)
+    // Fail safe: return 404 instead of 500 to avoid site-wide outages for a single venue
+    notFound()
+  }
 }
 
 async function fetchVenueData({
@@ -501,33 +509,40 @@ export async function generateMetadata({
   const stateName = parseStateFromURL(state)
   const cityName = parseCityFromURL(city)
   const venueName = parseVenueFromURL(venue)
+  try {
+    const { data: room } = await getEscapeRoomByVenue(venueName, cityName, stateName)
 
-  const { data: room } = await getEscapeRoomByVenue(venueName, cityName, stateName)
-
-  if (!room) {
-    return {
-      title: 'Escape Room Not Found | Escape Rooms Finder',
-      description: 'The requested escape room could not be found. Browse other escape rooms in your area.',
-      robots: {
-        index: false,
-        follow: true
+    if (!room) {
+      return {
+        title: 'Escape Room Not Found | Escape Rooms Finder',
+        description: 'The requested escape room could not be found. Browse other escape rooms in your area.',
+        robots: {
+          index: false,
+          follow: true
+        }
       }
     }
+
+    // Get state abbreviation from database
+    const stateAbbr = await getStateAbbreviation(stateName)
+
+    const description = room.description || `Experience ${room.name}, an exciting escape room located in ${cityName}, ${stateName}.`
+    const rating = room.rating
+
+    return createVenueMetadata(
+      room.name,
+      cityName,
+      stateName,
+      description,
+      country,
+      rating,
+      stateAbbr
+    )
+  } catch (error) {
+    console.error('[generateMetadata Error]', error)
+    return {
+      title: 'Escape Room | Escape Rooms Finder',
+      description: 'Find escape rooms near you and read reviews to pick the best experience.',
+    }
   }
-
-  // Get state abbreviation from database
-  const stateAbbr = await getStateAbbreviation(stateName)
-
-  const description = room.description || `Experience ${room.name}, an exciting escape room located in ${cityName}, ${stateName}.`
-  const rating = room.rating
-
-  return createVenueMetadata(
-    room.name,
-    cityName,
-    stateName,
-    description,
-    country,
-    rating,
-    stateAbbr
-  )
 }

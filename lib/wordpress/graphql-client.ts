@@ -25,10 +25,17 @@ export async function fetchGraphQL<T>(
     })
 
     if (!response.ok) {
-      throw new Error(`GraphQL request failed: ${response.status} ${response.statusText}`)
+      const text = await response.text().catch(() => '')
+      console.error(`GraphQL non-OK response: ${response.status} ${response.statusText}`, text)
+      throw new Error(`GraphQL request failed: ${response.status} ${response.statusText} - ${text}`)
     }
 
-    const result = await response.json()
+    const result = await response.json().catch(async (err) => {
+      // If JSON parsing failed, include raw text for diagnosis
+      const raw = await response.text().catch(() => '')
+      console.error('Failed to parse GraphQL JSON response:', err, raw)
+      throw err
+    })
 
     if (result.errors) {
       console.error('GraphQL Errors:', result.errors)
@@ -37,7 +44,7 @@ export async function fetchGraphQL<T>(
 
     return result.data as T
   } catch (error) {
-    console.error('GraphQL Error:', error)
+    console.error('GraphQL Error:', error instanceof Error ? error.message : error)
     throw error
   }
 }
