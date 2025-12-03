@@ -58,39 +58,34 @@ export function formatRoomForDisplay(room: EscapeRoom) {
   // Use reviews_average as the review count (it contains number of reviews, not average)
   const reviewCount = room.reviews_average || room.review_count || 0
 
-  // Clean venue name to avoid duplicate location info in URLs
-  const cleanedVenueName = room.city && room.state ?
-    cleanVenueName(room.name, room.city, room.state) :
-    room.name
-
   return {
     id: room.id,
     name: room.name,
     location: `${room.city || 'Unknown'}, ${room.state || 'Unknown'}`,
     city: room.city || 'Unknown',
     state: room.state || 'Unknown',
-    venue_name: cleanedVenueName, // Use cleaned venue name for URL generation
+    venue_name: room.name, // Use original venue name for URL generation
     rating: actualRating,
     reviews: reviewCount,
-    reviews_average: reviewCount, // Add reviews_average for compatibility
+    reviews_average: reviewCount,
     theme: room.category_new || 'Adventure',
-    category_new: room.category_new || 'Adventure', // Add category_new for compatibility
+    category_new: room.category_new || 'Adventure',
     difficulty: room.difficulty || 'Beginner',
     image: room.photo || '/placeholder.svg',
-    photo: room.photo || '/placeholder.svg', // Add photo for compatibility
+    photo: room.photo || '/placeholder.svg',
     description: room.description || '',
-    post_content: room.post_content || '', // Add post_content
+    post_content: room.post_content || '',
     address: room.full_address || '',
-    full_address: room.full_address || '', // Add full_address for compatibility
+    full_address: room.full_address || '',
     website: room.website || '',
-    phone: room.phone || '', // Add phone
-    latitude: room.latitude, // Add latitude
-    longitude: room.longitude, // Add longitude
-    price: null, // No default price - use actual data when available
+    phone: room.phone || '',
+    latitude: room.latitude,
+    longitude: room.longitude,
+    price: null,
     booking_url: room.order_links || '',
-    order_links: room.order_links || '', // Add order_links for compatibility
-    duration: 60, // Default duration in minutes
-    players: '2-6' // Default player range
+    order_links: room.order_links || '',
+    duration: 60,
+    players: '2-6'
   }
 }
 
