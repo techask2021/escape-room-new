@@ -2,30 +2,6 @@ import { WordPressEscapeRoom } from './types'
 import { EscapeRoom } from './types-shared'
 
 /**
- * Clean city name by removing state information
- * Handles cases like "Spring, Texas" -> "Spring" or "Hot Springs, Arkansas" -> "Hot Springs"
- */
-function cleanCityName(cityName: string | undefined): string | undefined {
-  if (!cityName) return undefined
-
-  // Split by comma and take only the first part (the actual city name)
-  const parts = cityName.split(',')
-  return parts[0].trim()
-}
-
-/**
- * Clean state name by removing country information
- * Handles cases like "Texas, USA" -> "Texas"
- */
-function cleanStateName(stateName: string | undefined): string | undefined {
-  if (!stateName) return undefined
-
-  // Split by comma and take only the first part (the actual state name)
-  const parts = stateName.split(',')
-  return parts[0].trim()
-}
-
-/**
  * Transform WordPress escape room to Supabase-compatible format
  * This allows switching from Supabase to WordPress without changing your entire codebase
  */
@@ -39,10 +15,10 @@ export function transformWordPressRoom(wpRoom: WordPressEscapeRoom): EscapeRoom 
 
     // Location (from taxonomies)
     full_address: wpRoom.escapeRoomDetails?.fullAddress || undefined,
-    city: cleanCityName(wpRoom.cities.nodes[0]?.name),
+    city: wpRoom.cities.nodes[0]?.name || undefined,
     country: wpRoom.countries.nodes[0]?.name || undefined,
     postal_code: wpRoom.escapeRoomDetails?.postalCode || undefined,
-    state: cleanStateName(wpRoom.states.nodes[0]?.name),
+    state: wpRoom.states.nodes[0]?.name || undefined,
     latitude: wpRoom.escapeRoomDetails?.latitude || undefined,
     longitude: wpRoom.escapeRoomDetails?.longitude || undefined,
 
@@ -104,10 +80,10 @@ export function transformWordPressRoomLite(wpRoom: WordPressEscapeRoom): EscapeR
 
     // Location (from taxonomies)
     // full_address: wpRoom.escapeRoomDetails?.fullAddress || undefined, // Exclude from lite
-    city: cleanCityName(wpRoom.cities.nodes[0]?.name),
+    city: wpRoom.cities.nodes[0]?.name || undefined,
     country: wpRoom.countries.nodes[0]?.name || undefined,
     // postal_code: wpRoom.escapeRoomDetails?.postalCode || undefined, // Exclude from lite
-    state: cleanStateName(wpRoom.states.nodes[0]?.name),
+    state: wpRoom.states.nodes[0]?.name || undefined,
     // latitude: wpRoom.escapeRoomDetails?.latitude || undefined, // Exclude from lite
     // longitude: wpRoom.escapeRoomDetails?.longitude || undefined, // Exclude from lite
 
