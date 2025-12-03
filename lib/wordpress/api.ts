@@ -320,7 +320,31 @@ export async function getEscapeRoomByVenue(
     // Find the best match
     const match = cityRooms.find(room => {
       const roomSlug = room.name?.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-')
-      return roomSlug?.includes(venueSlug) || venueSlug.includes(roomSlug || '')
+
+      // 1. Direct match
+      if (roomSlug?.includes(venueSlug) || venueSlug.includes(roomSlug || '')) return true
+
+      // 2. Cleaned match (remove city/state from room name to match URL format)
+      // This handles cases like DB: "Escape in Time, Spring" vs URL: "escape-in-time"
+      if (room.name) {
+        let cleanedName = room.name.toLowerCase()
+
+        // Remove city and state from the name if they exist
+        if (city) cleanedName = cleanedName.replace(new RegExp(city.toLowerCase(), 'g'), '')
+        if (state) cleanedName = cleanedName.replace(new RegExp(state.toLowerCase(), 'g'), '')
+
+        // Create slug from cleaned name
+        const cleanedSlug = cleanedName
+          .replace(/[^a-z0-9\s-]/g, '') // Remove special chars
+          .replace(/\s+/g, '-')         // Replace spaces with dashes
+          .replace(/-+/g, '-')          // Remove duplicate dashes
+          .replace(/^-|-$/g, '')        // Trim dashes from start/end
+
+        if (cleanedSlug === venueSlug) return true
+        if (cleanedSlug && (cleanedSlug.includes(venueSlug) || venueSlug.includes(cleanedSlug))) return true
+      }
+
+      return false
     })
 
     if (match) {
