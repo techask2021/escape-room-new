@@ -2,7 +2,7 @@
 const nextConfig = {
   // Increase timeout for static page generation during build
   staticPageGenerationTimeout: 180, // 3 minutes per page (default is 60 seconds)
-  
+
   images: {
     remotePatterns: [
       {
@@ -92,14 +92,14 @@ const nextConfig = {
       // to new pattern: /locations/united-states/{state}/{city}
       // This catches all variations including multi-word states
       {
-        source: '/locations/united/states-:state*/:city*',
-        destination: '/locations/united-states/:state*/:city*',
+        source: '/locations/united/states-:state/:city*',
+        destination: '/locations/united-states/:state/:city*',
         permanent: true, // 301 redirect
       },
       // Handle trailing slash variations
       {
-        source: '/locations/united/states-:state*/:city*/',
-        destination: '/locations/united-states/:state*/:city*',
+        source: '/locations/united/states-:state/:city*/',
+        destination: '/locations/united-states/:state/:city*',
         permanent: true,
       },
       // Redirect /locations/usa (exact match) to /locations/united-states
